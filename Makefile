@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: apavlov <apavlov@student.42.fr>            +#+  +:+       +#+         #
+#    By: anri <anri@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/01 22:23:36 by anri              #+#    #+#              #
-#    Updated: 2019/10/20 16:44:53 by apavlov          ###   ########.fr        #
+#    Updated: 2019/10/21 19:19:19 by anri             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC = clang++
+CC = clang++ -std=c++11
 
-FLAGS = -Wall -Wextra -Wconversion -std=c++11 -Werror
+FLAGS = -Wall -Wextra -Wconversion  -Werror
 
 NAME = avm
 

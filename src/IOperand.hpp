@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   IOperand.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apavlov <apavlov@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anri <anri@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 16:48:51 by apavlov           #+#    #+#             */
-/*   Updated: 2019/10/20 17:49:34 by apavlov          ###   ########.fr       */
+/*   Updated: 2019/10/21 22:13:54 by anri             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 
 # include <string>
 
+enum eOperandType{
+		Int8, Int16, Int32, Float, Double, Kappa = 145
+};
+
 class IOperand {
 public:
-	enum eOperandType{
-		Int8, Int16, Int32, Float, Double
-	};
-
 	virtual int		getPrecision() const = 0;
 	virtual eOperandType	getType() const = 0;
 
@@ -31,7 +31,6 @@ public:
 	virtual IOperand const *	operator%( IOperand const & rhs ) const = 0;
 
 	virtual std::string const &	toString() const = 0;
-
 	virtual ~IOperand() {}
 };
 
