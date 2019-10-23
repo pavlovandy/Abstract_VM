@@ -1,18 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Lexer.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anri <anri@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/18 18:48:29 by anri              #+#    #+#             */
-/*   Updated: 2019/10/23 21:15:13 by anri             ###   ########.fr       */
+/*   Created: 2019/10/23 21:16:14 by anri              #+#    #+#             */
+/*   Updated: 2019/10/23 21:16:49 by anri             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
+#ifndef ABSTRACT_VM_LEXER_HPP
+# define ABSTRACT_VM_LEXER_HPP
 
-int		main() {
-	PROtestiti osnovnii operazii
-	return (0);
+class Lexer
+{
+private:
+	/* data */
+public:
+	Lexer(/* args */);
+	~Lexer();
+};
+
+Lexer::Lexer(/* args */)
+{
 }
+
+Lexer::~Lexer()
+{
+}
+
+
+#endif

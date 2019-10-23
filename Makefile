@@ -6,19 +6,19 @@
 #    By: anri <anri@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/01 22:23:36 by anri              #+#    #+#              #
-#    Updated: 2019/10/21 19:19:19 by anri             ###   ########.fr        #
+#    Updated: 2019/10/23 21:10:53 by anri             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = clang++ -std=c++11
 
-FLAGS = -Wall -Wextra -Wconversion  -Werror
+FLAGS = -Wall -Wextra -Wconversion -Werror
 
 NAME = avm
 
-SRC =	main.cpp
+SRC =	main.cpp Operand.cpp MyExceptions.cpp Factory.cpp
 
-HEAD =	
+HEAD =	Operand.hpp IOperand.hpp Factory.hpp MyExceptions.hpp
 
 HEADERS = $(addprefix $(SRC_DIR), $(HEAD))
 

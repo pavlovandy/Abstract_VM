@@ -6,7 +6,7 @@
 /*   By: anri <anri@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 17:10:15 by apavlov           #+#    #+#             */
-/*   Updated: 2019/10/21 22:30:29 by anri             ###   ########.fr       */
+/*   Updated: 2019/10/23 21:09:47 by anri             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,20 @@
 # include "IOperand.hpp"
 # include <cstdint>
 # include "MyExceptions.hpp"
+# include <iostream>
+# include <sstream>
+# include <iomanip>
+# include "Factory.hpp"
 
 template < typename T >
 class Operand : public IOperand {
 	private:
-		T &		_value;
-		eOperandType const & _type;
+		T	_value;
+		eOperandType &	_type;
+		std::string &	_str;
 
-		eOperandType const	_setType() const ;
-		// void	checkOverFlow() const noexcept(false);
-		// void	checkDivisionZero( IOperand const & rhs ) const noexcept(false);
+		eOperandType *	_setType() const ;
+		std::string *	_setString( ) const ;
 
 	public:
 
@@ -33,7 +37,7 @@ class Operand : public IOperand {
 		Operand<T>( ) = delete ;
 		Operand<T>( Operand<T> const & o );
 		Operand<T> &	operator=( Operand<T> const & o );
-		~IOperand() = default ;
+		~Operand() = default ;
 
 		int		getPrecision() const ;
 		eOperandType	getType() const ;

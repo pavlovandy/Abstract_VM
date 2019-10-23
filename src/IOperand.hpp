@@ -6,7 +6,7 @@
 /*   By: anri <anri@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 16:48:51 by apavlov           #+#    #+#             */
-/*   Updated: 2019/10/21 22:13:54 by anri             ###   ########.fr       */
+/*   Updated: 2019/10/23 20:34:20 by anri             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <string>
 
 enum eOperandType{
-		Int8, Int16, Int32, Float, Double, Kappa = 145
+		Int8, Int16, Int32, Float, Double
 };
 
 class IOperand {

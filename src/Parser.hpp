@@ -1,18 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Parser.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anri <anri@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/18 18:48:29 by anri              #+#    #+#             */
-/*   Updated: 2019/10/23 21:15:13 by anri             ###   ########.fr       */
+/*   Created: 2019/10/23 21:15:28 by anri              #+#    #+#             */
+/*   Updated: 2019/10/23 21:16:07 by anri             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
+#ifndef ABSTRACT_VM_PARSER_HPP
+# define ABSTRACT_VM_PARSER_HPP
 
-int		main() {
-	PROtestiti osnovnii operazii
-	return (0);
+class Parser
+{
+private:
+	/* data */
+public:
+	Parser(/* args */);
+	~Parser();
+};
+
+Parser::Parser(/* args */)
+{
 }
+
+Parser::~Parser()
+{
+}
+
+
+#endif

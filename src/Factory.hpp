@@ -6,7 +6,7 @@
 /*   By: anri <anri@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 18:24:41 by anri              #+#    #+#             */
-/*   Updated: 2019/10/21 21:18:48 by anri             ###   ########.fr       */
+/*   Updated: 2019/10/23 18:53:25 by anri             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@
 # include <iostream>
 # include <stdexcept>
 # include "Operand.hpp"
-# include <climits>
-# include <cfloat>
+# include <limits>
 # include "MyExceptions.hpp"
 
 class Factory {
@@ -30,7 +29,7 @@ private:
 	IOperand const * createFloat( std::string const & value ) const;
 	IOperand const * createDouble( std::string const & value ) const;
 
-	typedef decltype (createInt8) createValue;
+	typedef decltype(&Factory::createInt8) createValue;
 	static std::vector<Factory::createValue> _v;
 
 public:
