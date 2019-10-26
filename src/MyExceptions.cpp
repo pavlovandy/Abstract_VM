@@ -3,28 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   MyExceptions.cpp                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anri <anri@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: Andrii Pavlov <apavlov@student.unit.ua>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 20:31:11 by anri              #+#    #+#             */
-/*   Updated: 2019/10/24 13:08:47 by anri             ###   ########.fr       */
+/*   Updated: 2019/10/26 14:24:41 by Andrii Pavl      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "MyExceptions.hpp"
 
-LexicalError::LexicalError() : _raw(0) {}
-LexicalError::LexicalError( int raw ) : _raw(raw) {}
-LexicalError::~LexicalError() {}
-LexicalError::LexicalError( LexicalError const & e ) : _raw(e._raw) {}
-LexicalError &	LexicalError::operator=( LexicalError const & e ) {
-	_raw = e._raw;
-	return (*this);
-}
-
 const char *	LexicalError::what() const noexcept(true){
-	std::string str("Lexical error at line : ");
-	str += std::to_string(_raw);
-	return str.c_str();
+	return "Lexical error";
 }
 
 const char *	UnderflowException::what() const noexcept(true){
@@ -49,25 +38,6 @@ const char *	TypesException::what() const noexcept(true){
 
 const char *	NoExitException::what() const noexcept(true){
 	return "There is no exit!!!!";
-}
-
-UnknownInstructionError::UnknownInstructionError() : _raw(0) {}
-
-UnknownInstructionError::UnknownInstructionError( int raw ) : _raw(raw) {}
-
-UnknownInstructionError::UnknownInstructionError( UnknownInstructionError const & e ) : _raw(e._raw) {}
-
-UnknownInstructionError &	UnknownInstructionError::operator=( UnknownInstructionError const & e ) {
-	_raw = e._raw;
-	return *this;
-}
-
-UnknownInstructionError::~UnknownInstructionError() {}
-
-const char *	UnknownInstructionError::what() const noexcept(true){
-	std::string str("Unknown instruction at line : ");
-	str += std::to_string(_raw);
-	return str.c_str();
 }
 
 const char *	StackIsTooSmall::what() const noexcept(true){

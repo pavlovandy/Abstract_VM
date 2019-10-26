@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   MyExceptions.hpp                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anri <anri@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: Andrii Pavlov <apavlov@student.unit.ua>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 20:26:48 by anri              #+#    #+#             */
-/*   Updated: 2019/10/24 13:08:23 by anri             ###   ########.fr       */
+/*   Updated: 2019/10/26 14:24:55 by Andrii Pavl      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,7 @@
 # include <stdexcept>
 
 class LexicalError : public std::exception {
-private:
-	int		_raw;
 public:
-	LexicalError();
-	LexicalError( int raw );
-	~LexicalError();
-	LexicalError( LexicalError const & );
-	LexicalError &	operator=( LexicalError const & );
 	virtual const char *	what() const noexcept(true);
 };
 
@@ -55,18 +48,6 @@ public:
 
 class NoExitException : public std::exception {
 public:
-	virtual const char *	what() const noexcept(true);
-};
-
-class UnknownInstructionError : public std::exception {
-private:
-	int		_raw;
-public:
-	UnknownInstructionError();
-	UnknownInstructionError( int raw );
-	UnknownInstructionError( UnknownInstructionError const & );
-	UnknownInstructionError &	operator=( UnknownInstructionError const & );
-	~UnknownInstructionError();
 	virtual const char *	what() const noexcept(true);
 };
 

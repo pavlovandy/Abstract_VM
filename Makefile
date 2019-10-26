@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: anri <anri@student.42.fr>                  +#+  +:+       +#+         #
+#    By: Andrii Pavlov <apavlov@student.unit.ua>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/01 22:23:36 by anri              #+#    #+#              #
-#    Updated: 2019/10/24 12:39:40 by anri             ###   ########.fr        #
+#    Updated: 2019/10/26 14:16:05 by Andrii Pavl      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,9 +16,9 @@ FLAGS = -Wall -Wextra -Wconversion -Werror
 
 NAME = avm
 
-SRC =	main.cpp Operand.cpp MyExceptions.cpp Factory.cpp
+SRC =	main.cpp Operand.cpp MyExceptions.cpp Factory.cpp Lexer.cpp Program.cpp Parser.cpp
 
-HEAD =	Operand.hpp IOperand.hpp Factory.hpp MyExceptions.hpp
+HEAD =	Operand.hpp IOperand.hpp Factory.hpp MyExceptions.hpp Lexer.hpp Program.hpp Parser.hpp
 
 HEADERS = $(addprefix $(SRC_DIR), $(HEAD))
 
