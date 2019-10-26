@@ -6,7 +6,7 @@
 /*   By: anri <anri@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 20:31:11 by anri              #+#    #+#             */
-/*   Updated: 2019/10/23 20:57:55 by anri             ###   ########.fr       */
+/*   Updated: 2019/10/24 13:08:47 by anri             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,3 +81,7 @@ const char *	AssertException::what() const noexcept(true){
 const char *	NotAnInteger::what() const noexcept(true){
 	return "Not an Integer";	
 }
+
+const char *	AllocationException::what() const noexcept(true) {
+	return "Allocaltion trouble";
+}	

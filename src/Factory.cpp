@@ -6,13 +6,14 @@
 /*   By: anri <anri@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 19:01:24 by anri              #+#    #+#             */
-/*   Updated: 2019/10/23 18:59:21 by anri             ###   ########.fr       */
+/*   Updated: 2019/10/24 12:50:06 by anri             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Factory.hpp"
 
 IOperand const * Factory::createInt8( std::string const & value ) const {
+	Operand<int8_t>*	ret = nullptr;
 	try {
 		long pre = std::stoll(value);
 
@@ -20,12 +21,12 @@ IOperand const * Factory::createInt8( std::string const & value ) const {
 			throw UnderflowException();
 		if ( pre > std::numeric_limits<int8_t>::max() )
 			throw OverflowException();
-		return (new Operand<int8_t>(static_cast<int8_t>(pre)));
+		ret = new Operand<int8_t>(static_cast<int8_t>(pre));
 	}
 	catch (std::exception & e) {
 		std::cerr << e.what() << std::endl;
 	}
-	return nullptr;
+	return ret;
 }
 
 IOperand const * Factory::createInt16( std::string const & value ) const {
