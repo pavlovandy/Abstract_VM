@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Program.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Andrii Pavlov <apavlov@student.unit.ua>    +#+  +:+       +#+        */
+/*   By: anri <anri@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 13:11:10 by anri              #+#    #+#             */
-/*   Updated: 2019/10/26 17:14:17 by Andrii Pavl      ###   ########.fr       */
+/*   Updated: 2019/10/27 19:38:27 by anri             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ Program::~Program() {
 
 void	Program::run() {
 	_lexer->checkAll(std::cin);
+	//copy paste here
 }
 
 void	Program::run( char * file ) {
@@ -41,71 +42,77 @@ void	Program::run( char * file ) {
 	ifile.seekg( 0, std::ios::beg );
 	//start the program
 	std::smatch m;
+	eOperandType	type;
+	std::string		command;
+	std::string		value;
 	while (!ifile.eof())
 	{
-		_parser->getMatches( ifile, m );
-		if (m.str(1) == "push")
-			_push(_factory->createOperand(_parser->strToEnum(m.str(2)), m.str(3)));
-		else if (m.str(1) == "pop")
+		_parser->getMatches( ifile, command, type, value );
+		if (command == "push")
+			_push(_factory->createOperand(type, value));
+		else if (command == "pop")
 			_pop();
-		else if (m.str(1) == "dump")
+		else if (command == "dump")
 			_dump();
-		else if (m.str(1) == "assert")
-			_assert(_factory->createOperand(_parser->strToEnum(m.str(2)), m.str(3)));
-		else if (m.str(1) == "add")
+		else if (command == "assert")
+			_assert(_factory->createOperand(type, value));
+		else if (command == "add")
 			_add();
-		else if (m.str(1) == "sub")
+		else if (command == "sub")
 			_sub();
-		else if (m.str(1) == "mul")
+		else if (command == "mul")
 			_mul();
-		else if (m.str(1) == "div")
+		else if (command == "div")
 			_div();
-		else if (m.str(1) == "mod")
+		else if (command == "mod")
 			_mod();
-		else if (m.str(1) == "print")
+		else if (command == "print")
 			_print();
-		else if (m.str(1) == "exit" || m.str(1) == ";;")
+		else if (command == "exit" || command == ";;")
 			break ;
 	}
 	ifile.close();
 }
 
 void	Program::_push( const IOperand* value ) {
-
+	std::cout << "Push " << value->getType() << " " << value->toString() << std::endl;
 }
 
 void	Program::_pop() {
-
+	std::cout << "Pop" << std::endl;
 }
 
 void	Program::_dump() const {
-
+	std::cout << "Dump" << std::endl;
 }
 
 void	Program::_assert( const IOperand* value ) {
+	std::cout << "Assert " << value->getType() << " " << value->toString() << std::endl;
+
+	delete value;
 	//need to delete pointer to value
 }
 
 void	Program::_add() {
-
+	std::cout << "Add" << std::endl;
 }
 
 void	Program::_sub() {
-
+	std::cout << "Sub" << std::endl;
 }
 
 void	Program::_mul() {
-
+	std::cout << "Mul" << std::endl;
 }
 
 void	Program::_div() {
-
+	std::cout << "Div" << std::endl;
 }
 
 void	Program::_mod() {
-
+	std::cout << "Mod" << std::endl;
 }
 
 void	Program::_print() const {
-
+	std::cout << "Print" << std::endl;
 }

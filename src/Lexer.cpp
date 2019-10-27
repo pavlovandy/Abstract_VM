@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Lexer.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Andrii Pavlov <apavlov@student.unit.ua>    +#+  +:+       +#+        */
+/*   By: anri <anri@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/26 14:05:32 by Andrii Pavl       #+#    #+#             */
-/*   Updated: 2019/10/26 14:58:28 by Andrii Pavl      ###   ########.fr       */
+/*   Updated: 2019/10/27 18:26:34 by anri             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	Lexer::checkAll( std::istream & i ) {
 			exit_flag = true;
 			break ;
 		}
-		if (check_line( str ))
+		if (check_line( str ) == false)
 		{
 			err = true;
 			std::cerr << "Lexical error on line " << line << std::endl;

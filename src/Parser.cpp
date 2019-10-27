@@ -3,40 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   Parser.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Andrii Pavlov <apavlov@student.unit.ua>    +#+  +:+       +#+        */
+/*   By: anri <anri@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/26 14:15:32 by Andrii Pavl       #+#    #+#             */
-/*   Updated: 2019/10/26 17:14:06 by Andrii Pavl      ###   ########.fr       */
+/*   Updated: 2019/10/27 19:38:16 by anri             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Parser.hpp"
 
-void Parser::getMatches( std::istream & i, std::smatch & sm ) {
-	static std::vector<std::regex> regex_vector = { std::regex("(\\s)*dump(\\s)*(;(.+))*"), \
-													std::regex("(\\s)*pop(\\s)*(;(.+))*"), \
-													std::regex("(\\s)*add(\\s)*(;(.+))*"), \
-													std::regex("(\\s)*sub(\\s)*(;(.+))*"), \
-													std::regex("(\\s)*mul(\\s)*(;(.+))*"), \
-													std::regex("(\\s)*div(\\s)*(;(.+))*"), \
-													std::regex("(\\s)*mod(\\s)*(;(.+))*"), \
-													std::regex("(\\s)*print(\\s)*(;(.+))*"), \
+void Parser::getMatches( std::istream & i, std::string & command, eOperandType & type, std::string &value ) {
+	static std::vector<std::regex> regex_vector = { std::regex("(dump)"), \
+													std::regex("(pop)"), \
+													std::regex("(add)"), \
+													std::regex("(sub)"), \
+													std::regex("(mul)"), \
+													std::regex("(div)"), \
+													std::regex("(mod)"), \
+													std::regex("(print)"), \
 													std::regex("(\\s)*"), \
 													std::regex("\\s*(;(.+))*"), \
-													std::regex("\\s*push\\s+"
+													std::regex("\\s*(push)\\s+"
 																"(int8|int16|int32|float|double)"
-																"\\((\\+|-)?[\\d]+(\\.[\\d]+)?\\)"
+																"\\(((\\+|-)?[\\d]+(\\.[\\d]+)?)\\)"
 																"\\s*(;(.+))*"), \
-													std::regex("(\\s)*assert(\\s)*"
+													std::regex("\\s*(assert)\\s*"
 																"(int8|int16|int32|float|double)"
-																"\\((\\+|-)?[\\d]+(\\.[\\d]+)?\\)"
-																"\\s*(;(.+))*")}; //aint right for parser... atm just copied form lexer
+																"\\(((\\+|-)?[\\d]+(\\.[\\d]+)?)\\)"
+																"\\s*(;(.+))*")};
 
 	std::string str;
+	std::smatch sm;
 	std::getline(i, str);
 	for ( const auto& reg : regex_vector )
 		if (std::regex_match(str, sm, reg))
 			break ;
+			
+	command = sm.str(1);
+	if (command == "push" || command == "assert")
+	{ 
+		type = strToEnum(sm.str(2));
+		value = sm.str(3);
+	}
 }
 
 eOperandType Parser::strToEnum( const std::string m ) {
