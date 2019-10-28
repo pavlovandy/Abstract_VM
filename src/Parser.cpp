@@ -6,13 +6,13 @@
 /*   By: anri <anri@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/26 14:15:32 by Andrii Pavl       #+#    #+#             */
-/*   Updated: 2019/10/27 19:38:16 by anri             ###   ########.fr       */
+/*   Updated: 2019/10/28 17:03:30 by anri             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Parser.hpp"
 
-void Parser::getMatches( std::istream & i, std::string & command, eOperandType & type, std::string &value ) {
+void Parser::getMatches( const std::string & str, std::string & command, eOperandType & type, std::string &value ) {
 	static std::vector<std::regex> regex_vector = { std::regex("(dump)"), \
 													std::regex("(pop)"), \
 													std::regex("(add)"), \
@@ -30,11 +30,9 @@ void Parser::getMatches( std::istream & i, std::string & command, eOperandType &
 													std::regex("\\s*(assert)\\s*"
 																"(int8|int16|int32|float|double)"
 																"\\(((\\+|-)?[\\d]+(\\.[\\d]+)?)\\)"
-																"\\s*(;(.+))*")};
-
-	std::string str;
+																"\\s*(;(.+))*"),
+													std::regex("\\s*(exit|;;)\\s*(;(.+))*")};
 	std::smatch sm;
-	std::getline(i, str);
 	for ( const auto& reg : regex_vector )
 		if (std::regex_match(str, sm, reg))
 			break ;

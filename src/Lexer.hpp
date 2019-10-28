@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Lexer.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Andrii Pavlov <apavlov@student.unit.ua>    +#+  +:+       +#+        */
+/*   By: anri <anri@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 21:16:14 by anri              #+#    #+#             */
-/*   Updated: 2019/10/26 14:38:43 by Andrii Pavl      ###   ########.fr       */
+/*   Updated: 2019/10/28 16:57:33 by anri             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 class Lexer {
 public:
-	bool check_line( std::string );
+	bool check_line( const std::string & str );
 	void checkAll( std::istream & );
 };
 

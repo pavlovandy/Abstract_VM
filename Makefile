@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: Andrii Pavlov <apavlov@student.unit.ua>    +#+  +:+       +#+         #
+#    By: anri <anri@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/01 22:23:36 by anri              #+#    #+#              #
-#    Updated: 2019/10/26 14:16:05 by Andrii Pavl      ###   ########.fr        #
+#    Updated: 2019/10/28 16:26:27 by anri             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC = clang++ -std=c++11
+CC = clang++ -std=c++14
 
 FLAGS = -Wall -Wextra -Wconversion -Werror
 

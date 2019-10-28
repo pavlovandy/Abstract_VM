@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Program.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Andrii Pavlov <apavlov@student.unit.ua>    +#+  +:+       +#+        */
+/*   By: anri <anri@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 12:55:08 by anri              #+#    #+#             */
-/*   Updated: 2019/10/26 16:14:54 by Andrii Pavl      ###   ########.fr       */
+/*   Updated: 2019/10/28 16:30:12 by anri             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,16 @@
 # include <stack>
 # include <fstream>
 # include <regex>
+# include <memory>
 
 class Parser;
 
 class Program {
 private:
-	Factory *		_factory;
-	std::stack< IOperand* >	_stack;
-	Lexer *			_lexer;
-	Parser *		_parser;
+	Factory _factory;
+	std::stack< const IOperand * >	_stack;
+	Lexer 	_lexer;
+	Parser 	_parser;
 
 	void	_push( const IOperand* value );
 	void	_pop();

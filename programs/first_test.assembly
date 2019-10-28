@@ -1,6 +1,0 @@
-push int8(1)
-assert int8(123)
-mul
-dump
-pop
-exit

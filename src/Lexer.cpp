@@ -6,7 +6,7 @@
 /*   By: anri <anri@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/26 14:05:32 by Andrii Pavl       #+#    #+#             */
-/*   Updated: 2019/10/27 18:26:34 by anri             ###   ########.fr       */
+/*   Updated: 2019/10/28 17:08:25 by anri             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	Lexer::checkAll( std::istream & i ) {
 			err = true;
 			std::cerr << "Lexical error on line " << line << std::endl;
 		}
+		
 	}
 	if (err)
 		throw LexicalError();
@@ -37,7 +38,7 @@ void	Lexer::checkAll( std::istream & i ) {
 		throw NoExitException();
 }
 
-bool	Lexer::check_line( std::string str ) {
+bool	Lexer::check_line( const std::string & str ) {
 	static std::vector<std::regex> regex_vector = { std::regex("(\\s)*dump(\\s)*(;(.+))*"), \
 													std::regex("(\\s)*pop(\\s)*(;(.+))*"), \
 													std::regex("(\\s)*add(\\s)*(;(.+))*"), \
@@ -47,15 +48,16 @@ bool	Lexer::check_line( std::string str ) {
 													std::regex("(\\s)*mod(\\s)*(;(.+))*"), \
 													std::regex("(\\s)*print(\\s)*(;(.+))*"), \
 													std::regex("(\\s)*"), \
-													std::regex("\\s*(;(.+))*"), \
+													std::regex("\\s*(;(.*))*"), \
 													std::regex("\\s*push\\s+"
 																"(int8|int16|int32|float|double)"
 																"\\((\\+|-)?[\\d]+(\\.[\\d]+)?\\)"
-																"\\s*(;(.+))*"), \
+																"\\s*(;(.*))*"), \
 													std::regex("(\\s)*assert(\\s)*"
 																"(int8|int16|int32|float|double)"
 																"\\((\\+|-)?[\\d]+(\\.[\\d]+)?\\)"
-																"\\s*(;(.+))*")};
+																"\\s*(;(.*))*"),
+													std::regex("(\\s)*(exit|;;)(\\s)*(;(.+))*")};
 	bool isMatch = false;
 
 	for ( const auto& reg : regex_vector )

@@ -6,56 +6,84 @@
 /*   By: anri <anri@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 13:11:10 by anri              #+#    #+#             */
-/*   Updated: 2019/10/27 19:38:27 by anri             ###   ########.fr       */
+/*   Updated: 2019/10/28 17:10:33 by anri             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Program.hpp"
 
-Program::Program() : 
-	_factory( new Factory ), 
-	_lexer( new Lexer ), 
-	_parser( new Parser ) {
-	if (_factory == nullptr || _lexer == nullptr || _parser == nullptr)
-		throw AllocationException();
-}
+Program::Program(){}
 
 Program::~Program() {
-	delete _factory;
-	delete _lexer;
-	delete _parser;
 	while (!_stack.empty())
 		_stack.pop();
 }
 
 void	Program::run() {
-	_lexer->checkAll(std::cin);
-	//copy paste here
-}
-
-void	Program::run( char * file ) {
-	std::ifstream	ifile(file);
-	//lex it
-	_lexer->checkAll(ifile);
-	//go to the start of the file
-	ifile.clear( );
-	ifile.seekg( 0, std::ios::beg );
-	//start the program
 	std::smatch m;
+	
 	eOperandType	type;
 	std::string		command;
+	bool			exitFlag = 0;
 	std::string		value;
-	while (!ifile.eof())
+	for ( std::string	line; std::getline(std::cin, line); )
 	{
-		_parser->getMatches( ifile, command, type, value );
+		if (_lexer.check_line(line) == false)
+			throw LexicalError();
+		_parser.getMatches( line, command, type, value );
 		if (command == "push")
-			_push(_factory->createOperand(type, value));
+			_push(_factory.createOperand(type, value));
 		else if (command == "pop")
 			_pop();
 		else if (command == "dump")
 			_dump();
 		else if (command == "assert")
-			_assert(_factory->createOperand(type, value));
+			_assert(_factory.createOperand(type, value));
+		else if (command == "add")
+			_add();
+		else if (command == "sub")
+			_sub();
+		else if (command == "mul")
+			_mul();
+		else if (command == "div")
+			_div();
+		else if (command == "mod")
+			_mod();
+		else if (command == "print")
+			_print();
+		else if (command == "exit" || command == ";;")
+		{
+			exitFlag = true;
+			break ;
+		}
+	}
+	if (!exitFlag)
+		throw NoExitException();
+}
+
+void	Program::run( char * file ) {
+	std::ifstream	ifile(file);
+	//lex it
+	_lexer.checkAll(ifile);
+	//go to the start of the file
+	ifile.clear( );
+	ifile.seekg( 0, std::ios::beg );
+	//start the program
+	
+	eOperandType	type;
+	std::string		command;
+	std::string		value;
+	for (std::string line; std::getline(ifile, line); )
+	{	
+		_parser.getMatches( line, command, type, value );
+		if (command == "push")
+			_push(_factory.createOperand(type, value));
+		else if (command == "pop")
+			_pop();
+		else if (command == "dump")
+			_dump();
+		else if (command == "assert")
+			_assert(_factory.createOperand(type, value));
 		else if (command == "add")
 			_add();
 		else if (command == "sub")
@@ -75,44 +103,97 @@ void	Program::run( char * file ) {
 }
 
 void	Program::_push( const IOperand* value ) {
-	std::cout << "Push " << value->getType() << " " << value->toString() << std::endl;
+	_stack.push(value);
 }
 
 void	Program::_pop() {
-	std::cout << "Pop" << std::endl;
+	if (!_stack.empty())
+		_stack.pop();
+	else
+		throw StackIsTooSmall();
 }
 
 void	Program::_dump() const {
-	std::cout << "Dump" << std::endl;
+	if (_stack.empty())
+		std::cout << "Stack is empty" << std::endl;
+	else
+		for ( auto new_stack = _stack; !new_stack.empty(); new_stack.pop() )
+			std::cout << new_stack.top()->toString() << std::endl;
 }
 
 void	Program::_assert( const IOperand* value ) {
-	std::cout << "Assert " << value->getType() << " " << value->toString() << std::endl;
-
+	if (_stack.empty())
+		throw StackIsTooSmall();
+	if (std::stod(_stack.top()->toString()) != std::stod(value->toString()))
+		throw AssertException();
 	delete value;
-	//need to delete pointer to value
 }
 
 void	Program::_add() {
-	std::cout << "Add" << std::endl;
+	if (_stack.size() < 2)
+		throw StackIsTooSmall();
+	const IOperand* right = _stack.top();
+	_stack.pop();
+	const IOperand* left = _stack.top();
+	_stack.pop();
+	_stack.push(*left + *right);
+	delete left;
+	delete right;
 }
 
 void	Program::_sub() {
-	std::cout << "Sub" << std::endl;
+	if (_stack.size() < 2)
+		throw StackIsTooSmall();
+	const IOperand* right = _stack.top();
+	_stack.pop();
+	const IOperand* left = _stack.top();
+	_stack.pop();
+	_stack.push(*left - *right);
+	delete left;
+	delete right;
 }
 
 void	Program::_mul() {
-	std::cout << "Mul" << std::endl;
+	if (_stack.size() < 2)
+		throw StackIsTooSmall();
+	const IOperand* right = _stack.top();
+	_stack.pop();
+	const IOperand* left = _stack.top();
+	_stack.pop();
+	_stack.push(*left * *right);
+	delete left;
+	delete right;
 }
 
 void	Program::_div() {
-	std::cout << "Div" << std::endl;
+	if (_stack.size() < 2)
+		throw StackIsTooSmall();
+	const IOperand* right = _stack.top();
+	_stack.pop();
+	const IOperand* left = _stack.top();
+	_stack.pop();
+	_stack.push(*left / *right);
+	delete left;
+	delete right;
 }
 
 void	Program::_mod() {
-	std::cout << "Mod" << std::endl;
+	if (_stack.size() < 2)
+		throw StackIsTooSmall();
+	const IOperand* right = _stack.top();
+	_stack.pop();
+	const IOperand* left = _stack.top();
+	_stack.pop();
+	_stack.push(*left % *right);
+	delete left;
+	delete right;
 }
 
 void	Program::_print() const {
-	std::cout << "Print" << std::endl;
+	if (!_stack.empty())
+		throw StackIsTooSmall();
+	if (_stack.top()->getType() == Int8)
+		std::cout << static_cast<char>(std::stoi(_stack.top()->toString())) << std::endl;
+	else
+		throw TypesException();
 }
