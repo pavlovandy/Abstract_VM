@@ -1,0 +1,16 @@
+push int8(32)
+push int16(4242)
+dump
+pop
+push int32(42424242)
+dump
+push float(42.42)
+pop
+dump
+pop
+push double(0.42424242)
+dump
+pop
+dump
+pop
+exit

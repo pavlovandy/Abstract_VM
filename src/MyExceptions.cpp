@@ -6,7 +6,7 @@
 /*   By: Andrii Pavlov <apavlov@student.unit.ua>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 20:31:11 by anri              #+#    #+#             */
-/*   Updated: 2019/10/26 14:24:41 by Andrii Pavl      ###   ########.fr       */
+/*   Updated: 2019/11/02 15:56:04 by Andrii Pavl      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,3 +55,7 @@ const char *	NotAnInteger::what() const noexcept(true){
 const char *	AllocationException::what() const noexcept(true) {
 	return "Allocaltion trouble";
 }	
+
+const char *	NoSuchFile::what() const noexcept(true) {
+	return "No such file";
+}

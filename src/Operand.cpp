@@ -6,7 +6,7 @@
 /*   By: Andrii Pavlov <apavlov@student.unit.ua>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 22:22:20 by anri              #+#    #+#             */
-/*   Updated: 2019/10/26 14:42:12 by Andrii Pavl      ###   ########.fr       */
+/*   Updated: 2019/11/02 15:17:13 by Andrii Pavl      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,99 +55,74 @@ Operand<T> &	Operand<T>::operator=( Operand<T> const & o ) {
 template < typename T >
 IOperand const *	Operand<T>::operator+( IOperand const & rhs ) const {
 	eOperandType highest = std::max(_type, rhs.getType());
-	try {
-		if (highest < Float)
-			return (Factory().createOperand(highest, \
-				std::to_string(std::stoll(rhs.toString()) + static_cast<long long>(_value))));
-		else
-			return (Factory().createOperand(highest, \
-				std::to_string(std::stod(rhs.toString()) + static_cast<double>(_value))));	
-	}
-	catch ( std::exception & e ) {
-		std::cerr << e.what() << std::endl;
-	}
+	if (highest < Float)
+		return (Factory().createOperand(highest, \
+			std::to_string(std::stoll(rhs.toString()) + static_cast<long long>(_value))));
+	else
+		return (Factory().createOperand(highest, \
+			std::to_string(std::stod(rhs.toString()) + static_cast<double>(_value))));	
 	return (nullptr);
 }
 
 template < typename T >
 IOperand const *	Operand<T>::operator-( IOperand const & rhs ) const {
 	eOperandType highest = std::max(_type, rhs.getType());
-	try {
-		if (highest < Float)
-			return (Factory().createOperand(highest, \
-				std::to_string(std::stoll(rhs.toString()) - static_cast<long long>(_value))));
-		else
-			return (Factory().createOperand(highest, \
-				std::to_string(std::stod(rhs.toString()) - static_cast<double>(_value))));	
-	}
-	catch ( std::exception & e ) {
-		std::cerr << e.what() << std::endl;
-	}
+	if (highest < Float)
+		return (Factory().createOperand(highest, \
+			std::to_string(std::stoll(rhs.toString()) - static_cast<long long>(_value))));
+	else
+		return (Factory().createOperand(highest, \
+			std::to_string(std::stod(rhs.toString()) - static_cast<double>(_value))));	
 	return (nullptr);
 }
 
 template < typename T >
 IOperand const *	Operand<T>::operator*( IOperand const & rhs ) const {
 	eOperandType highest = std::max(_type, rhs.getType());
-	try {
-		if (highest < Float)
-			return (Factory().createOperand(highest, \
-				std::to_string(std::stoll(rhs.toString()) * static_cast<long long>(_value))));
-		else
-			return (Factory().createOperand(highest, \
-				std::to_string(std::stod(rhs.toString()) * static_cast<double>(_value))));	
-	}
-	catch ( std::exception & e ) {
-		std::cerr << e.what() << std::endl;
-	}
+	if (highest < Float)
+		return (Factory().createOperand(highest, \
+			std::to_string(std::stoll(rhs.toString()) * static_cast<long long>(_value))));
+	else
+		return (Factory().createOperand(highest, \
+			std::to_string(std::stod(rhs.toString()) * static_cast<double>(_value))));	
 	return (nullptr);
 }
 
 template < typename T >
 IOperand const *	Operand<T>::operator/( IOperand const & rhs ) const {
 	eOperandType highest = std::max(_type, rhs.getType());
-	try {
-		if (highest < Float)
-		{
-			long long div = std::stoll(rhs.toString());
-			if (div == 0)
-				throw DivisionByZero();
-			return (Factory().createOperand(highest, \
-				std::to_string(static_cast<long long>(_value) / div)));
-		}
-		else
-		{
-			double div = std::stod(rhs.toString());
-			if (div == 0)
-				throw DivisionByZero();
-			return (Factory().createOperand(highest, \
-				std::to_string(static_cast<double>(_value) / div)));
-		}	
+	if (highest < Float)
+	{
+		long long div = std::stoll(rhs.toString());
+		if (div == 0)
+			throw DivisionByZero();
+		return (Factory().createOperand(highest, \
+			std::to_string(static_cast<long long>(_value) / div)));
 	}
-	catch ( std::exception & e ) {
-		std::cerr << e.what() << std::endl;
-	}
+	else
+	{
+		double div = std::stod(rhs.toString());
+		if (div == 0)
+			throw DivisionByZero();
+		return (Factory().createOperand(highest, \
+			std::to_string(static_cast<double>(_value) / div)));
+	}	
 	return (nullptr);
 }
 
 template < typename T >
 IOperand const *	Operand<T>::operator%( IOperand const & rhs ) const {
 	eOperandType highest = std::max(_type, rhs.getType());
-	try {
-		if (highest < Float)
-		{
-			long long div = std::stoll(rhs.toString());
-			if (div == 0)
-				throw DivisionByZero();
-			return (Factory().createOperand(highest, \
-				std::to_string(static_cast<long long>(_value) % div)));
-		}
-		else
-			throw NotAnInteger();
+	if (highest < Float)
+	{
+		long long div = std::stoll(rhs.toString());
+		if (div == 0)
+			throw DivisionByZero();
+		return (Factory().createOperand(highest, \
+			std::to_string(static_cast<long long>(_value) % div)));
 	}
-	catch ( std::exception & e ) {
-		std::cerr << e.what() << std::endl;
-	}
+	else
+		throw NotAnInteger();
 	return (nullptr);
 }
 

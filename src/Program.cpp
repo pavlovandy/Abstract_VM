@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Program.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anri <anri@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: Andrii Pavlov <apavlov@student.unit.ua>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 13:11:10 by anri              #+#    #+#             */
-/*   Updated: 2019/10/28 17:10:33 by anri             ###   ########.fr       */
+/*   Updated: 2019/11/02 16:12:20 by Andrii Pavl      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ void	Program::run() {
 void	Program::run( char * file ) {
 	std::ifstream	ifile(file);
 	//lex it
+	if (!ifile)
+		throw NoSuchFile();
 	_lexer.checkAll(ifile);
 	//go to the start of the file
 	ifile.clear( );
@@ -190,7 +192,7 @@ void	Program::_mod() {
 }
 
 void	Program::_print() const {
-	if (!_stack.empty())
+	if (_stack.empty())
 		throw StackIsTooSmall();
 	if (_stack.top()->getType() == Int8)
 		std::cout << static_cast<char>(std::stoi(_stack.top()->toString())) << std::endl;

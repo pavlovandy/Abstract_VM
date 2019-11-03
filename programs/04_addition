@@ -1,0 +1,11 @@
+push int8(42) 
+push int16(2987)
+add
+push int32(98755)
+add
+push int8(84);asodfakfds
+add
+push float(3457.409)
+add
+            dump           
+exit
